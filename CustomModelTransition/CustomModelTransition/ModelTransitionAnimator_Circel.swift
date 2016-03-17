@@ -57,7 +57,7 @@ class ModelTransitionAnimator_Circel: NSObject, UIViewControllerAnimatedTransiti
         else if fromVC.isBeingDismissed() {
             self.isPresent = false
             
-            //Dismiss时候，不需要add toView
+            //处理 Dismiss 转场，.Custom模式下不要将toView添加到containerView
             
             fromView.layer.mask = shapLayer
             
