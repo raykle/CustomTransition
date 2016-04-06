@@ -18,7 +18,7 @@ class NavigationTransitionAnimator: NSObject, UIViewControllerAnimatedTransition
     }
 
     func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -> NSTimeInterval {
-        return 0.3
+        return 1
     }
     
     func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
@@ -34,7 +34,7 @@ class NavigationTransitionAnimator: NSObject, UIViewControllerAnimatedTransition
         var fromViewTransfrom = CGAffineTransformIdentity
         var toViewTransform = CGAffineTransformIdentity
         
-        translation = transitionType! == UINavigationControllerOperation.Push ? translation : -translation
+        translation = transitionType! == .Push ? translation : -translation
         fromViewTransfrom = CGAffineTransformMakeTranslation(-translation, 0)
         toViewTransform = CGAffineTransformMakeTranslation(translation, 0)
         
