@@ -9,11 +9,24 @@
 import UIKit
 
 class TabbarTransitionDelegate: NSObject, UITabBarControllerDelegate {
+    
+    var interactive = false
+    let interactionController = UIPercentDrivenInteractiveTransition()
+    
     func tabBarController(tabBarController: UITabBarController, animationControllerForTransitionFromViewController fromVC: UIViewController, toViewController toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return nil
+        
+        if !interactive {
+            return nil
+        }
+        
+        let fromIndex = tabBarController.viewControllers!.indexOf(fromVC)
+        let toIndex = tabBarController.viewControllers!.indexOf(toVC)
+        
+        let operationDirection: TabbarOperationDirection = toIndex < fromIndex ? TabbarOperationDirection.Right : TabbarOperationDirection.Left
+        return TabbarTransitionAnimator(direction: operationDirection)
     }
     
     func tabBarController(tabBarController: UITabBarController, interactionControllerForAnimationController animationController: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
-        return nil
+        return interactive ? interactionController : nil
     }
 }
